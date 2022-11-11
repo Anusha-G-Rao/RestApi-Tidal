@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:alpine
 
 MAINTAINER Anusha Rao
 Label maintainer="Anusha Rao"
