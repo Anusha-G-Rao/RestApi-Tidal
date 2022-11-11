@@ -1,7 +1,7 @@
 import unittest
 
 try:
-    from app import app
+    from app.app import app
 
 except Exception as e:
     print("Some Modules are Missing {}".format(e))

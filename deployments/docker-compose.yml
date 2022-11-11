@@ -1,0 +1,9 @@
+version: "2"
+services:
+  app:
+    container_name: RestApi-Tidal
+    build:
+      context: ../
+      dockerfile: deployments/app/Dockerfile
+    ports:
+      -"8080:8080"
