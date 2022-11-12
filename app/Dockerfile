@@ -12,6 +12,6 @@ RUN apk add build-base
 RUN pip install -r requirements.txt
 
 COPY . .
-RUN python test.py || exit 1
-CMD ["python", "app.py"]
+RUN python ./app/test.py || exit 1
+CMD ["python", "./app/app.py"]
 
