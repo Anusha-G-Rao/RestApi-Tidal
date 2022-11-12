@@ -7,7 +7,7 @@ LABEL git_commit=$GIT_COMMIT
 
 WORKDIR /app
 
-COPY requirements.txt .
+COPY ./app/requirements.txt .
 RUN apk add build-base
 RUN pip install -r requirements.txt
 
