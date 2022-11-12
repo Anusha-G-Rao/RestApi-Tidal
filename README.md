@@ -129,4 +129,6 @@ Connection: close
 {"accepted_request":8,"blocked_request":2,"cidr":[{"cidr":"172.19.0.0/24","currentts":"2022-11-12T18:55:11.672251","expirets":"2022-11-12T18:56:11.672234","id":1,"ttl":60},{"cidr":"172.19.0.0/24","currentts":"2022-11-12T18:56:37.956956","expirets":"2022-11-12T18:57:37.956935","id":2,"ttl":60}]}
 ```
 
+Future Improvements:
 
+Change the password from plain text to hash.
