@@ -94,6 +94,7 @@ Connection: close
 {"message":"Requests will be blocked from an IP in CIDR"}
 ```
 ######  Testing:
+All endpoints except the default '/' will be blocked for the IPs iin the CIDR block range.
 ```
 curl -i -H 'Accept: application/json' http://localhost:8080/healthcheck
 ```
