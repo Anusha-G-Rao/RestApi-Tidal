@@ -133,3 +133,4 @@ Future Improvements:
 
 Change the password from plain text to hash.
 Testing his on AWS creating a VPC and subnets.
+Rate limiter
