@@ -1,7 +1,6 @@
 version: "2"
 services:
-    app:
-        container_name: RestApi-Tidal
-        build: .
-        ports:
-            - "8080:8080"
+    flask_app:
+      image: restapi-tidal
+      ports:
+        - "8080:8080"
