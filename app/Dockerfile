@@ -1,5 +1,10 @@
 FROM python:3.8.10-alpine
 
+MAINTAINER Anusha Rao
+
+ARG GIT_COMMIT=unspecified
+LABEL git_commit=$GIT_COMMIT
+
 WORKDIR /app
 
 COPY requirements.txt .
