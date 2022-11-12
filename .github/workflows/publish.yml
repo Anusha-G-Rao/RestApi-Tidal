@@ -21,7 +21,7 @@ jobs:
       run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
     - name: Build Docker image
-      run: docker build . --file ./app/Dockerfile --tag restapi-tidal/latest
+      run: docker build . --file ./app/Dockerfile --tag restapi-tidal:latest
 
     - name: Push into Docker Hub
-      run: docker push restapi-tidal/latest
+      run: docker push grao2701/restapi-tidal:latest
