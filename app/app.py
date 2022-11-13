@@ -80,9 +80,9 @@ def stats():
         global acceptedrequest
         acceptedrequest = acceptedrequest + 1
         cidr_list = Cidr.query.all()
-        cidr_val = cidr_schema.dump(cidr_list)
+        num_cidr = len(cidr_list)
         return jsonify({'accepted_request': acceptedrequest, 'blocked_request': blockedrequest,
-                        "cidr": cidr_val}), 200
+                        "cidr": num_cidr}), 200
     else:
         return jsonify({'Message': 'Cannot process request'}), 403
 
