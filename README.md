@@ -1,11 +1,26 @@
 ## RestApi-Tidal
 
+###### Prerequisites
+
+Install Docker and terraform.
+```
+terraform init 
+terraform plan 
+terraform apply 
+```
+```
+docker ps
+
+# restapi-tidal
+```
+You can find the IP address to send request from 'docker logs container-id'. For certain endpoints rate limiter has been added.
+
 ######  Request 
 ```
 GET /
 ```
 ```
-curl -i -H 'Accept: application/json' http://localhost:8080/
+curl -i -H 'Accept: application/json' http://<IP-ADDRESS>:8080/
 ```
 ######  Response:
 ```
@@ -24,7 +39,7 @@ Connection: close
 GET /healthcheck
 ```
 ```
-curl -i -H 'Accept: application/json' http://localhost:8080/healthcheck
+curl -i -H 'Accept: application/json' http://<IP-ADDRESS>:8080/healthcheck
 ```
 ######  Response:
 ```
@@ -43,7 +58,7 @@ Connection: close
 POST /register
 ```
 ```
-curl -i -X POST -H "Content-Type: application/json" -d '{"password": "nailit", "email": "brandon@example.com"}' http://localhost:8080/register
+curl -i -X POST -H "Content-Type: application/json" -d '{"password": "nailit", "email": "brandon@example.com"}' http://<IP-ADDRESS>:8080/register
 ```
 ######  Response
 ```
@@ -62,7 +77,7 @@ Connection: close
 POST /login
 ```
 ```
-curl -i -X POST -H "Content-Type: application/json" -d '{"password": "nailit", "email": "brandon@example.com"}' http://localhost:8080/login
+curl -i -X POST -H "Content-Type: application/json" -d '{"password": "nailit", "email": "brandon@example.com"}' http://<IP-ADDRESS>:8080/login
 ```
 ######  Response
 ```
@@ -80,7 +95,7 @@ Connection: close
 POST /block
 ```
 ```
-curl -i -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" -d '{"cidr":"172.19.0.0/24","ttl":"60"}' http://172.19.0.1:8080/block
+curl -i -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" -d '{"cidr":"172.19.0.0/24","ttl":"60"}' http://<IP-ADDRESS>:8080/block
 ```
 ######  Reponse
 ```
@@ -96,7 +111,7 @@ Connection: close
 ######  Testing:
 All endpoints except the default '/' will be blocked for the IPs iin the CIDR block range.
 ```
-curl -i -H 'Accept: application/json' http://localhost:8080/healthcheck
+curl -i -H 'Accept: application/json' http://<IP-ADDRESS>:8080/healthcheck
 ```
 ######  Response
 ```
@@ -115,7 +130,7 @@ Connection: close
 GET /stats
 ```
 ```
-curl -i -H 'Accept: application/json' http://localhost:8080/stats
+curl -i -H 'Accept: application/json' http://<IP-ADDRESS>:8080/stats
 ```
 ######  Response
 ```
