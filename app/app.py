@@ -58,6 +58,7 @@ def db_seed():
     db.session.commit()
     print('Database seeded')
 
+# Defining routes
 
 @app.route("/", methods=['GET'])
 def home():
@@ -114,7 +115,7 @@ def register():
         if inrange == 0:
             email = request.json['email']
             password = request.json['password']
-            user = Users(email=email, password=password)
+            user = Users(email=email, password=generate_password_hash(password))
             db.session.add(user)
             try:
                 db.session.commit()
@@ -135,8 +136,8 @@ def login():
         if inrange == 0:
             email = request.json['email']
             password = request.json['password']
-            test = Users.query.filter_by(email=email, password=password).first()
-            if test:
+            test = Users.query.filter_by(email=email).first()
+            if (test is not None) and check_password_hash(test.password, password):
                 access_token = create_access_token(identity=email)
                 return jsonify(message='login succeeded!', access_token=access_token)
             else:
@@ -160,6 +161,7 @@ def findrange(ipadd):
 
 
 # database models
+
 class Cidr(db.Model):
     __tablename__ = 'cidrblock'
     id = Column(Integer, primary_key=True)

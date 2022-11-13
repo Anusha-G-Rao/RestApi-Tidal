@@ -131,8 +131,7 @@ Connection: close
 
 ###### Future Improvements:
 
-Change the password from plain text to hash.
+Structure the code
 
 Testing this on AWS creating a VPC and subnets.
 
-Rate limiter
