@@ -9,6 +9,8 @@ from ipaddress import IPv4Network, IPv4Address, ip_network, ip_address
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.exc import IntegrityError
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
 app = Flask(__name__)
 
@@ -25,6 +27,13 @@ db = SQLAlchemy(app)
 ma = Marshmallow(app)
 # Instantiate JWT manager
 jwt = JWTManager(app)
+
+# Rate limiter
+limiter = Limiter(
+    app,
+    key_func=get_remote_address,
+    default_limits=["200 per day", "50 per hour"]
+)
 
 # create database
 @app.cli.command('db_create')
@@ -61,11 +70,13 @@ def db_seed():
 # Defining routes
 
 @app.route("/", methods=['GET'])
+@limiter.exempt
 def home():
     return jsonify({'message': 'You have arrived!'}), 200
 
 
 @app.route("/healthcheck", methods=['GET'])
+@limiter.exempt
 def health_check():
     inrange = findrange(request.remote_addr)
     if inrange == 0:
@@ -75,6 +86,7 @@ def health_check():
 
 
 @app.route("/stats", methods=['GET'])
+@limiter.limit("5 per minute")
 def stats():
     inrange = findrange(request.remote_addr)
     if inrange == 0:
@@ -90,6 +102,7 @@ def stats():
 
 @app.route("/block", methods=['POST'])
 @jwt_required()
+@limiter.limit("1 per minute")
 def index():
     if request.is_json:
         inrange = findrange(request.remote_addr)
@@ -109,6 +122,7 @@ def index():
 
 
 @app.route("/register", methods=['POST'])
+@limiter.limit("1 per minute")
 def register():
     if request.is_json:
         inrange = findrange(request.remote_addr)
@@ -130,6 +144,7 @@ def register():
 
 
 @app.route("/login", methods=['POST'])
+@limiter.limit("1 per minute")
 def login():
     if request.is_json:
         inrange = findrange(request.remote_addr)
