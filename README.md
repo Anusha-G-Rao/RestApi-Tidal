@@ -148,5 +148,7 @@ Connection: close
 
 Structure the code
 
+Add more test cases
+
 Testing this on AWS creating a VPC and subnets.
 
